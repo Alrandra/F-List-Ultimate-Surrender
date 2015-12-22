@@ -3,10 +3,23 @@
 <dom-module id="ustools-builder-attribute-slider">
   <template is="dom-bind">
     <style>
+    paper-slider {
+      float: left;
+    }
+    strong {
+      float: left;
+      padding-top: 20px;
+      width: 180px;
+    }
+    div {
+      width: 800px;
+      height: 40px;
+    }
     </style>
-      <p><strong>{{attribute.name}}</strong>: <span>{{attribute.value}}</span></p>
-      <paper-slider min="1" snaps=true steps="1" max-markers="10" max="11" value="{{attribute.value}}" editable=true ></paper-slider>
+
+      <div><strong>{{attribute.name}}</strong> <paper-slider min="1" snaps=true steps="1" max-markers="10" max="11" value="{{attribute.value}}" editable=true ></paper-slider></div>
       <p>{{attribute.decription}}</p>
+
   </template>
 
   <script>
