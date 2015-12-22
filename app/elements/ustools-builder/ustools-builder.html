@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="ustools-builder-attribute-slider.html">
+<link rel="import" href="ustools-builder-bboutput.html">
 
 <dom-module id="ustools-builder">
   <template is="dom-bind">
@@ -12,6 +13,7 @@
       <template is="dom-repeat" items="{{attributes}}">
         <ustools-builder-attribute-slider attribute="{{item}}"> </ustools-builder-attribute-slider>
       </template>
+      <ustools-builder-bboutput attributes="{{attributes}}"> </ustools-builder-bboutput>
   </template>
 
   <script>
