@@ -1,0 +1,40 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="ustools-builder-bboutput">
+  <template is="dom-bind">
+    <style>
+    </style>
+    <h3>BB Code export:</h3>
+    <p>Copy the BB code to add it to yout profile</p>
+    <paper-textarea label="BB Code" value="{{bbcode}}"></paper-textarea>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'ustools-builder-bboutput',
+        properties: {
+          attributes: {
+            type: Array
+          },
+          bbcode: {
+            type: String,
+            computed: 'renderBBcode(attributes)'
+          },
+        },
+        ready: function() {
+          this.startingPoints = 10;
+        },
+        renderBBcode: function(attributes) {
+          var bb = '';
+          attributes.forEach(function(attribute) {
+            bb = bb + attribute.name + ': ' + attribute.value;
+          });
+          return bb;
+        }
+      });
+    })();
+  </script>
+</dom-module>
