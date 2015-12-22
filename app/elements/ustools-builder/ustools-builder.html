@@ -32,7 +32,7 @@
           },
           remainingAttributePoints: {
             type: Number,
-            computed: 'calculateRemainingAttributePoints(startingPoints, additionalAttributePoints, spendAttributePoints)'
+            value: 10
           },
           attributes: {
             type: Array,
@@ -67,13 +67,16 @@
           },
         },
         observers: [
-          'updatedAttributes(attributes.*)'
+          'updatedAttributes(attributes.*)',
+          'updatedAddAttr(additionalAttributePoints)'
         ],
         ready: function() {
           this.startingPoints = 10;
+          this.calculateRemainingAttributePoints();
         },
         updatedAttributes: function() {
           this.spendAttributePoints = this.calculateSpendAttributePoints(this.attributes);
+          this.remainingAttributePoints = this.calculateRemainingAttributePoints();
         },
         calculateSpendAttributePoints: function(attributes) {
           var spend = 0;
@@ -82,8 +85,14 @@
           });
           return spend;
         },
-        calculateRemainingAttributePoints: function(startingPoints, additionalAttributePoints, spendAttributePoints) {
-          return startingPoints + parseInt(additionalAttributePoints) - parseInt(spendAttributePoints);
+        calculateRemainingAttributePoints: function() {
+          var ra = 10;
+          ra = ra + parseInt(this.additionalAttributePoints);
+          ra = ra - parseInt(this.spendAttributePoints);
+          return ra;
+        },
+        updatedAddAttr: function() {
+          this.remainingAttributePoints = this.calculateRemainingAttributePoints();
         }
       });
     })();
