@@ -21,19 +21,33 @@
           },
           bbcode: {
             type: String,
-            computed: 'renderBBcode(attributes)'
+            value: ''
           },
         },
+        observers: [
+          'updatedAttributes(attributes.*)'
+        ],
         ready: function() {
           this.startingPoints = 10;
+          this.renderBBcode(this.attributes);
         },
         renderBBcode: function(attributes) {
-          var bb = '';
+          var bb = '[b]Real name: [/b]';
+          bb = bb + '\n';
+          bb = bb + '[b]Ring name: [/b]';
+          bb = bb + '\n';
+
           attributes.forEach(function(attribute) {
-            bb = bb + attribute.name + ': ' + attribute.value;
+            bb = bb + '[b]';
+            bb = bb + attribute.name + ': [/b]' + attribute.value + '\n';
           });
-          return bb;
-        }
+          this.bbcode = bb;
+        },
+        updatedAttributes: function() {
+          this.renderBBcode(this.attributes);
+          // alert(this.attributes[1].value);
+        },
+
       });
     })();
   </script>
