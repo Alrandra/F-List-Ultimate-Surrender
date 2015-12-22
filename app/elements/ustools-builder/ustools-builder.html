@@ -1,0 +1,91 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="ustools-builder-attribute-slider.html">
+
+<dom-module id="ustools-builder">
+  <template is="dom-bind">
+    <style>
+    </style>
+      <p>Starting attribute points:<strong>{{startingPoints}}</strong></p>
+      <paper-input label="Additional Attribute Points" value="{{additionalAttributePoints}}" type="number" min="0" max="100" auto-validate preventInvalidInput minlength="1" ></paper-input>
+      <p>Spend attribute points:<strong>{{spendAttributePoints}}</strong> Remaining attribute points:<strong>{{remainingAttributePoints}}</strong></p>
+      <template is="dom-repeat" items="{{attributes}}">
+        <ustools-builder-attribute-slider attribute="{{item}}"> </ustools-builder-attribute-slider>
+      </template>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'ustools-builder',
+        properties: {
+          additionalAttributePoints: {
+            value: 0,
+            type: Number
+          },
+          spendAttributePoints: {
+            type: Number,
+            //computed: 'calculateSpendAttributePoints(attributes)'
+            value: 0
+          },
+          remainingAttributePoints: {
+            type: Number,
+            computed: 'calculateRemainingAttributePoints(startingPoints, additionalAttributePoints, spendAttributePoints)'
+          },
+          attributes: {
+            type: Array,
+            value: [
+              {
+                name: 'Strength',
+                value: 1,
+                decription: 'Your Physical Strength'
+              },
+              {
+                name: 'Speed',
+                value: 1,
+                decription: 'Your Physical Strength'
+              }, {
+                name: 'Orgasm Resistance',
+                value: 1,
+                decription: 'Your Physical Strength'
+              }, {
+                name: 'Submission Resistance',
+                value: 1,
+                decription: 'Your Physical Strength'
+              }, {
+                name: 'Submission',
+                value: 1,
+                decription: 'Your Physical Strength'
+              }, {
+                name: 'Force orgasm',
+                value: 1,
+                decription: 'Your Physical Strength'
+              }
+            ]
+          },
+        },
+        observers: [
+          'updatedAttributes(attributes.*)'
+        ],
+        ready: function() {
+          this.startingPoints = 10;
+        },
+        updatedAttributes: function() {
+          this.spendAttributePoints = this.calculateSpendAttributePoints(this.attributes);
+        },
+        calculateSpendAttributePoints: function(attributes) {
+          var spend = 0;
+          attributes.forEach(function(attribute) {
+            spend = spend + parseInt(attribute.value) - 1;
+          });
+          return spend;
+        },
+        calculateRemainingAttributePoints: function(startingPoints, additionalAttributePoints, spendAttributePoints) {
+          return startingPoints + parseInt(additionalAttributePoints) - parseInt(spendAttributePoints);
+        }
+      });
+    })();
+  </script>
+</dom-module>

@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="ustools-builder-attribute-slider">
+  <template is="dom-bind">
+    <style>
+    </style>
+      <p><strong>{{attribute.name}}</strong>: <span>{{attribute.value}}</span></p>
+      <paper-slider min="1" snaps=true steps="1" max-markers="10" max="11" value="{{attribute.value}}" editable=true ></paper-slider>
+      <p>{{attribute.decription}}</p>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'ustools-builder-attribute-slider',
+        properties: {
+          attribute: {
+            type: Object
+          },
+        },
+        ready: function() {
+          this.startingPoints = 10;
+        },
+      });
+    })();
+  </script>
+</dom-module>
