@@ -19997,10 +19997,23 @@ module.exports = Array.isArray || function (arr) {
     </style></template></dom-module><dom-module id="ustools-builder-attribute-slider" assetpath="ustools-builder/">
   <template is="dom-bind">
     <style>
+    paper-slider {
+      float: left;
+    }
+    strong {
+      float: left;
+      padding-top: 20px;
+      width: 180px;
+    }
+    div {
+      width: 800px;
+      height: 40px;
+    }
     </style>
-      <p><strong>{{attribute.name}}</strong>: <span>{{attribute.value}}</span></p>
-      <paper-slider min="1" snaps="true" steps="1" max-markers="10" max="11" value="{{attribute.value}}" editable="true"></paper-slider>
+
+      <div><strong>{{attribute.name}}</strong> <paper-slider min="1" snaps="true" steps="1" max-markers="10" max="11" value="{{attribute.value}}" editable="true"></paper-slider></div>
       <p>{{attribute.decription}}</p>
+
   </template>
 
   <script>
@@ -20025,9 +20038,9 @@ module.exports = Array.isArray || function (arr) {
   <template is="dom-bind">
     <style>
     </style>
-    <h3>BB Code export:</h3>
+    <h2>BB Code export:</h2>
     <p>Copy the BB code to add it to yout profile</p>
-    <paper-textarea label="BB Code" value="{{bbcode}}"></paper-textarea>
+    <paper-textarea label="BB Code" value="{{bbcode}}" readonly="true"></paper-textarea>
   </template>
 
   <script>
@@ -20042,19 +20055,33 @@ module.exports = Array.isArray || function (arr) {
           },
           bbcode: {
             type: String,
-            computed: 'renderBBcode(attributes)'
+            value: ''
           },
         },
+        observers: [
+          'updatedAttributes(attributes.*)'
+        ],
         ready: function() {
           this.startingPoints = 10;
+          this.renderBBcode(this.attributes);
         },
         renderBBcode: function(attributes) {
-          var bb = '';
+          var bb = '[b]Real name: [/b]';
+          bb = bb + '\n';
+          bb = bb + '[b]Ring name: [/b]';
+          bb = bb + '\n';
+
           attributes.forEach(function(attribute) {
-            bb = bb + attribute.name + ': ' + attribute.value;
+            bb = bb + '[b]';
+            bb = bb + attribute.name + ': [/b]' + attribute.value + '\n';
           });
-          return bb;
-        }
+          this.bbcode = bb;
+        },
+        updatedAttributes: function() {
+          this.renderBBcode(this.attributes);
+          // alert(this.attributes[1].value);
+        },
+
       });
     })();
   </script>
@@ -20062,10 +20089,18 @@ module.exports = Array.isArray || function (arr) {
 <dom-module id="ustools-builder" assetpath="ustools-builder/">
   <template is="dom-bind">
     <style>
+    #addAttWrapper {
+      width: 400px;
+    }
+
     </style>
-      <p>Starting attribute points:<strong>{{startingPoints}}</strong></p>
-      <paper-input label="Additional Attribute Points" value="{{additionalAttributePoints}}" type="number" min="0" max="100" auto-validate="" preventinvalidinput="" minlength="1"></paper-input>
-      <p>Spend attribute points:<strong>{{spendAttributePoints}}</strong> Remaining attribute points:<strong>{{remainingAttributePoints}}</strong></p>
+      <h2>Attributes</h2>
+      <p>Attributes make your character and determine what moves you can make. Every Attribute starts at 1 and can be improves to 11. At the start you have 10 points to distribute but you can earn more points by winning and participation.</p>
+      <h3>Overview</h3>
+      <div id="addAttWrapper"><span>If you gained additional Points enter them below </span><paper-input label="Additional Attribute Points" value="{{additionalAttributePoints}}" type="number" min="0" max="100" auto-validate="" preventinvalidinput="" minlength="1" maxlength="3"></paper-input></div>
+      <p>Spend attribute points: <strong>{{spendAttributePoints}}</strong></p>
+      <p>Remaining attribute points:<strong>{{remainingAttributePoints}}</strong></p>
+      <h3>Choose Attributes</h3>
       <template is="dom-repeat" items="{{attributes}}">
         <ustools-builder-attribute-slider attribute="{{item}}"> </ustools-builder-attribute-slider>
       </template>

@@ -6,10 +6,18 @@
 <dom-module id="ustools-builder">
   <template is="dom-bind">
     <style>
+    #addAttWrapper {
+      width: 400px;
+    }
+
     </style>
-      <p>Starting attribute points:<strong>{{startingPoints}}</strong></p>
-      <paper-input label="Additional Attribute Points" value="{{additionalAttributePoints}}" type="number" min="0" max="100" auto-validate preventInvalidInput minlength="1" ></paper-input>
-      <p>Spend attribute points:<strong>{{spendAttributePoints}}</strong> Remaining attribute points:<strong>{{remainingAttributePoints}}</strong></p>
+      <h2>Attributes</h2>
+      <p>Attributes make your character and determine what moves you can make. Every Attribute starts at 1 and can be improves to 11. At the start you have 10 points to distribute but you can earn more points by winning and participation.</p>
+      <h3>Overview</h3>
+      <div id="addAttWrapper"><span>If you gained additional Points enter them below </span><paper-input label="Additional Attribute Points" value="{{additionalAttributePoints}}" type="number" min="0" max="100" auto-validate preventInvalidInput minlength="1" maxlength="3"></paper-input></div>
+      <p>Spend attribute points: <strong>{{spendAttributePoints}}</strong></p>
+      <p>Remaining attribute points:<strong>{{remainingAttributePoints}}</strong></p>
+      <h3>Choose Attributes</h3>
       <template is="dom-repeat" items="{{attributes}}">
         <ustools-builder-attribute-slider attribute="{{item}}"> </ustools-builder-attribute-slider>
       </template>
