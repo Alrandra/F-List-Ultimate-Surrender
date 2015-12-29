@@ -138,7 +138,7 @@ app.usamoves = [
   },
   {
     name: 'Chokes',
-    reqStrength: 3,
+    reqStrength: 8,
     reqSpeed: 1,
     reqOrgasm: 0,
     reqSubmission: 6,
