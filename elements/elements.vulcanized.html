@@ -20573,10 +20573,10 @@ module.exports = Array.isArray || function (arr) {
     <paper-card heading="{{move.name}}" class$="attributeCard {{active}}" animated="true">
       <div class="card-content">{{move.decription}}</div>
       <div class="card-actions">
-        <p> Damage Stats</p>
+        <p>Stats</p>
         <span>Sta: <strong>{{move.staminaCost}}</strong></span>
         <span>HP: <strong>{{move.physicalDamage}}</strong></span>
-        <span>Org: <strong>{{move.orgasmDamage}}</strong></span>
+        <span>Lust: <strong>{{move.lustDamage}}</strong></span>
         <span>H-Dur: <strong>{{move.holdDuration}}</strong></span>
       </div>
       <div class="card-actions">
@@ -20675,10 +20675,14 @@ module.exports = Array.isArray || function (arr) {
   <template is="dom-bind">
     <style>
     </style>
-    <template is="dom-repeat" items="{{moves}}">
+    <h3>Brawling</h3>
+    <template is="dom-repeat" items="{{moves}}" filter="isBrawl">
       <ustools-builder-move move="{{item}}" attributes="{{attributes}}"></ustools-builder-move>
     </template>
-
+    <h3>Submision</h3>
+    <template is="dom-repeat" items="{{moves}}" filter="isSubmission">
+      <ustools-builder-move move="{{item}}" attributes="{{attributes}}"></ustools-builder-move>
+    </template>
   </template>
 
   <script>
@@ -20697,6 +20701,12 @@ module.exports = Array.isArray || function (arr) {
         },
         ready: function() {
           this.startingPoints = 10;
+        },
+        isBrawl: function(item) {
+          return item.category === 'brawl';
+        },
+        isSubmission: function(item) {
+          return item.category === 'submission';
         },
       });
     })();
