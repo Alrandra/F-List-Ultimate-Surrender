@@ -134,7 +134,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <p>Here you can build a character. Every attribute starts on 1 and you have 10 points to distribute</p>
               </paper-material>
               <paper-material elevation="1">
-                <ustools-builder></ustools-builder>
+                <ustools-builder attributes="{{usattributes}}"></ustools-builder>
+              </paper-material>
+              <paper-material elevation="1">
+                <ustools-builder-bboutput attributes="{{usattributes}}"></ustools-builder-bboutput>
               </paper-material>
             </section>
 
@@ -175,6 +178,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
+  <!-- endbuild-->
+  <!-- build:js scripts/usattributes.js -->
+  <script src="scripts/usattributes.js"></script>
   <!-- endbuild-->
 </body>
 
