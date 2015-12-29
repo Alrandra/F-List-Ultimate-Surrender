@@ -82,6 +82,84 @@ app.usamoves = [
     staminaCost: 10,
     holdDuration: 2,
     category: 'brawl',
-    decription: 'Kick your opponent'
+    decription: ''
+  },
+  {
+    name: 'Stretched submissions',
+    reqStrength: 3,
+    reqSpeed: 2,
+    reqOrgasm: 0,
+    reqSubmission: 3,
+    lustDamage: 0,
+    physicalDamage: 15,
+    staminaCost: 10,
+    holdDuration: 2,
+    category: 'submission',
+    decription: ''
+  },
+  {
+    name: 'Arm locks',
+    reqStrength: 1,
+    reqSpeed: 1,
+    reqOrgasm: 0,
+    reqSubmission: 8,
+    lustDamage: 0,
+    physicalDamage: 5,
+    staminaCost: 5,
+    holdDuration: 2,
+    category: 'submission',
+    decription: ''
+  },
+  {
+    name: 'Body locks',
+    reqStrength: 4,
+    reqSpeed: 1,
+    reqOrgasm: 0,
+    reqSubmission: 6,
+    lustDamage: 0,
+    physicalDamage: 20,
+    staminaCost: 15,
+    holdDuration: 2,
+    category: 'submission',
+    decription: ''
+  },
+  {
+    name: 'Leg locks',
+    reqStrength: 4,
+    reqSpeed: 4,
+    reqOrgasm: 0,
+    reqSubmission: 2,
+    lustDamage: 0,
+    physicalDamage: 15,
+    staminaCost: 10,
+    holdDuration: 2,
+    category: 'submission',
+    decription: ''
+  },
+  {
+    name: 'Chokes',
+    reqStrength: 3,
+    reqSpeed: 1,
+    reqOrgasm: 0,
+    reqSubmission: 6,
+    lustDamage: 0,
+    physicalDamage: 20,
+    staminaCost: 20,
+    holdDuration: 3,
+    category: 'submission',
+    decription: ''
+  },
+  {
+    name: 'Transition holds',
+    reqStrength: 3,
+    reqSpeed: 3,
+    reqOrgasm: 0,
+    reqSubmission: 3,
+    lustDamage: 0,
+    physicalDamage: 5,
+    staminaCost: 5,
+    holdDuration: 2,
+    category: 'submission',
+    decription: ''
   }
 ];

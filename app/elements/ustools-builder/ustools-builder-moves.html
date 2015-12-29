@@ -5,10 +5,14 @@
   <template is="dom-bind">
     <style>
     </style>
-    <template is="dom-repeat" items="{{moves}}">
+    <h3>Brawling</h3>
+    <template is="dom-repeat" items="{{moves}}" filter="isBrawl">
       <ustools-builder-move move="{{item}}" attributes="{{attributes}}"></ustools-builder-move>
     </template>
-
+    <h3>Submision</h3>
+    <template is="dom-repeat" items="{{moves}}" filter="isSubmission">
+      <ustools-builder-move move="{{item}}" attributes="{{attributes}}"></ustools-builder-move>
+    </template>
   </template>
 
   <script>
@@ -27,6 +31,12 @@
         },
         ready: function() {
           this.startingPoints = 10;
+        },
+        isBrawl: function(item) {
+          return item.category == 'brawl';
+        },
+        isSubmission: function(item) {
+          return item.category == 'submission';
         },
       });
     })();
