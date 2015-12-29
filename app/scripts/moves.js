@@ -1,3 +1,4 @@
+// jscs:disable maximumLineLength
 app.usamoves = [
   {
     name: 'SLAM!',
