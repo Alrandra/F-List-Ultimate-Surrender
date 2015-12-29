@@ -13,6 +13,14 @@
     <template is="dom-repeat" items="{{moves}}" filter="isSubmission">
       <ustools-builder-move move="{{item}}" attributes="{{attributes}}"></ustools-builder-move>
     </template>
+    <h3>Force orgasm</h3>
+    <template is="dom-repeat" items="{{moves}}" filter="isOrgasm">
+      <ustools-builder-move move="{{item}}" attributes="{{attributes}}"></ustools-builder-move>
+    </template>
+    <h3>Highflying</h3>
+    <template is="dom-repeat" items="{{moves}}" filter="isHighflying">
+      <ustools-builder-move move="{{item}}" attributes="{{attributes}}"></ustools-builder-move>
+    </template>
   </template>
 
   <script>
@@ -37,6 +45,12 @@
         },
         isSubmission: function(item) {
           return item.category === 'submission';
+        },
+        isOrgasm: function(item) {
+          return item.category === 'orgasm';
+        },
+        isHighflying: function(item) {
+          return item.category === 'highflying';
         },
       });
     })();
