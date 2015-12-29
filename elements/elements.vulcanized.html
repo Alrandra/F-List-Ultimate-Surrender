@@ -13433,6 +13433,8 @@ is separate from validation, and `allowed-pattern` does not affect how the input
 
 
 
+
+
 <script>!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.page=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (process){
   /* globals require, module */
@@ -20086,6 +20088,133 @@ module.exports = Array.isArray || function (arr) {
     })();
   </script>
 </dom-module>
+<dom-module id="ustools-builder-move" assetpath="ustools-builder/">
+  <template is="dom-bind">
+    <style>
+      #true {
+        background-color: green;
+      }
+      #false {
+        background-color: red;
+      }
+    </style>
+    <div id="{{active}}">{{move.name}}<span>{{active}}</span></div>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'ustools-builder-move',
+        properties: {
+          attributes: {
+            type: Array
+          },
+          move: {
+            type: Object
+          },
+          active: {
+            type: Boolean,
+            value: false,
+          },
+          reqStrength: {
+            type: Boolean,
+            value: false,
+          },
+          reqSpeed: {
+            type: Boolean,
+            value: false,
+          },
+          reqOrgasm: {
+            type: Boolean,
+            value: false,
+          },
+          reqSubmission: {
+            type: Boolean,
+            value: false,
+          }
+        },
+        ready: function() {
+          this.updatedAttributesM();
+        },
+        observers: [
+          'updatedAttributesM(attributes.*)'
+        ],
+        calcStrength: function() {
+          if (this.attributes[0].value >= this.move.reqStrength) {
+            this.reqStrength = true;
+          } else {
+            this.reqStrength = false;
+          }
+        },
+        calcSpeed: function() {
+          if (this.attributes[1].value >= this.move.reqSpeed) {
+            this.reqSpeed = true;
+          } else {
+            this.reqSpeed = false;
+          }
+        },
+        calcSubmission: function() {
+          if (this.attributes[4].value >= this.move.reqSubmission) {
+            this.reqSubmission = true;
+          } else {
+            this.reqSubmission = false;
+          }
+        },
+        calcOrgasm: function() {
+          if (this.attributes[5].value >= this.move.reqOrgasm) {
+            this.reqOrgasm = true;
+          } else {
+            this.reqOrgasm = false;
+          }
+        },
+        calcRequirements: function() {
+          this.calcStrength();
+          this.calcSpeed();
+          this.calcSubmission();
+          this.calcOrgasm();
+        },
+        updatedAttributesM: function() {
+          this.calcRequirements();
+          this.active = this.reqStrength && this.reqSpeed && this.reqSubmission && this.reqOrgasm;
+        },
+      });
+    })();
+  </script>
+</dom-module>
+<dom-module id="ustools-builder-moves" assetpath="ustools-builder/">
+  <template is="dom-bind">
+    <style>
+    </style>
+    <template is="dom-repeat" items="{{moves}}">
+      <ustools-builder-move move="{{item}}" attributes="{{attributes}}"></ustools-builder-move>
+    </template>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'ustools-builder-moves',
+        properties: {
+          attributes: {
+            type: Array
+          },
+          moves: {
+            type: Array
+          },
+        },
+        ready: function() {
+          this.startingPoints = 10;
+        },
+      });
+    })();
+  </script>
+</dom-module>
 <dom-module id="ustools-builder" assetpath="ustools-builder/">
   <template is="dom-bind">
     <style>
@@ -20104,7 +20233,6 @@ module.exports = Array.isArray || function (arr) {
       <template is="dom-repeat" items="{{attributes}}">
         <ustools-builder-attribute-slider attribute="{{item}}"> </ustools-builder-attribute-slider>
       </template>
-      <ustools-builder-bboutput attributes="{{attributes}}"> </ustools-builder-bboutput>
   </template>
 
   <script>
@@ -20129,6 +20257,7 @@ module.exports = Array.isArray || function (arr) {
           },
           attributes: {
             type: Array,
+            reflectToAttribute: true,
             value: [
               {
                 name: 'Strength',
@@ -20138,23 +20267,27 @@ module.exports = Array.isArray || function (arr) {
               {
                 name: 'Speed',
                 value: 1,
-                decription: 'Your Physical Strength'
+                decription: 'Your Physical Speed'
               }, {
                 name: 'Orgasm Resistance',
                 value: 1,
-                decription: 'Your Physical Strength'
+                decription: 'Reduces damage taken by orgasm attacks & improves ability to break out'
               }, {
                 name: 'Submission Resistance',
                 value: 1,
-                decription: 'Your Physical Strength'
+                decription: 'Reduces damage taken by submisions & improves ability to break out'
               }, {
                 name: 'Submission',
                 value: 1,
-                decription: 'Your Physical Strength'
+                decription: 'Improves your submission attacks'
               }, {
                 name: 'Force orgasm',
                 value: 1,
-                decription: 'Your Physical Strength'
+                decription: 'Improves your orgasm attacks'
+              }, {
+                name: 'Toughness',
+                value: 1,
+                decription: 'Reduces the damage you take from brawl, flying high & grappling'
               }
             ]
           },
