@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="ustools-builder-move.html">
+
+<dom-module id="ustools-builder-moves">
+  <template is="dom-bind">
+    <style>
+    </style>
+    <template is="dom-repeat" items="{{moves}}">
+      <ustools-builder-move move="{{item}}" attributes="{{attributes}}"></ustools-builder-move>
+    </template>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'ustools-builder-moves',
+        properties: {
+          attributes: {
+            type: Array
+          },
+          moves: {
+            type: Array
+          },
+        },
+        ready: function() {
+          this.startingPoints = 10;
+        },
+      });
+    })();
+  </script>
+</dom-module>

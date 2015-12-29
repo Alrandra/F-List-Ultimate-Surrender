@@ -1,0 +1,98 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="ustools-builder-move">
+  <template is="dom-bind">
+    <style>
+      #true {
+        background-color: green;
+      }
+      #false {
+        background-color: red;
+      }
+    </style>
+    <div id="{{active}}">{{move.name}}<span>{{active}}</span></div>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'ustools-builder-move',
+        properties: {
+          attributes: {
+            type: Array
+          },
+          move: {
+            type: Object
+          },
+          active: {
+            type: Boolean,
+            value: false,
+          },
+          reqStrength: {
+            type: Boolean,
+            value: false,
+          },
+          reqSpeed: {
+            type: Boolean,
+            value: false,
+          },
+          reqOrgasm: {
+            type: Boolean,
+            value: false,
+          },
+          reqSubmission: {
+            type: Boolean,
+            value: false,
+          }
+        },
+        ready: function() {
+          this.updatedAttributesM();
+        },
+        observers: [
+          'updatedAttributesM(attributes.*)'
+        ],
+        calcStrength: function() {
+          if (this.attributes[0].value >= this.move.reqStrength) {
+            this.reqStrength = true;
+          } else {
+            this.reqStrength = false;
+          }
+        },
+        calcSpeed: function() {
+          if (this.attributes[1].value >= this.move.reqSpeed) {
+            this.reqSpeed = true;
+          } else {
+            this.reqSpeed = false;
+          }
+        },
+        calcSubmission: function() {
+          if (this.attributes[4].value >= this.move.reqSubmission) {
+            this.reqSubmission = true;
+          } else {
+            this.reqSubmission = false;
+          }
+        },
+        calcOrgasm: function() {
+          if (this.attributes[5].value >= this.move.reqOrgasm) {
+            this.reqOrgasm = true;
+          } else {
+            this.reqOrgasm = false;
+          }
+        },
+        calcRequirements: function() {
+          this.calcStrength();
+          this.calcSpeed();
+          this.calcSubmission();
+          this.calcOrgasm();
+        },
+        updatedAttributesM: function() {
+          this.calcRequirements();
+          this.active = this.reqStrength && this.reqSpeed && this.reqSubmission && this.reqOrgasm;
+        },
+      });
+    })();
+  </script>
+</dom-module>
