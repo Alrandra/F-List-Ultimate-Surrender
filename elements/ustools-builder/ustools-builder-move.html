@@ -3,15 +3,41 @@
 <dom-module id="ustools-builder-move">
   <template is="dom-bind">
     <style>
-      #true {
-        background-color: green;
+      .attributeCard {
+        width: 250px;
+        margin-bottom: 10px;
       }
-      #false {
-        background-color: red;
+
+      .attributeCard.true {
+        background-color: #c8e6c9;
+      }
+      .attributeCard.false {
+        background-color: #ffcdd2;
+      }
+      .req.true {
+        color: green;
+      }
+      .req.false {
+        color: red;
       }
     </style>
-    <div id="{{active}}">{{move.name}}<span>{{active}}</span></div>
-
+    <paper-card heading="{{move.name}}" class$="attributeCard {{active}}" animated=true>
+      <div class="card-content">{{move.decription}}</div>
+      <div class="card-actions">
+        <p> Damage Stats</p>
+        <span>Sta: <strong>{{move.staminaCost}}</strong></span>
+        <span>HP: <strong>{{move.physicalDamage}}</strong></span>
+        <span>Org: <strong>{{move.orgasmDamage}}</strong></span>
+        <span>H-Dur: <strong>{{move.holdDuration}}</strong></span>
+      </div>
+      <div class="card-actions">
+        <p>Requirements</p>
+        <span>Str: <strong class$="req {{reqStrength}}">{{move.reqStrength}}</strong></span>
+        <span>Sp: <strong class$="req {{reqSpeed}}">{{move.reqSpeed}}</strong></span>
+        <span>Org: <strong class$="req {{reqOrgasm}}">{{move.reqOrgasm}}</strong></span>
+        <span>Sub: <strong class$="req {{reqSubmission}}">{{move.reqSubmission}}</strong></span>
+      </div>
+    </paper-card>
   </template>
 
   <script>
