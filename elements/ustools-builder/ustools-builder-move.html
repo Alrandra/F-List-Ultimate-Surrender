@@ -20,18 +20,25 @@
       .req.false {
         color: red;
       }
+      h4 {
+        margin: 0;
+      }
+      paper-card {
+        --paper-card-header-text: { font-size: 20px;
+        padding-bottom: 0px;};
+      }
+
     </style>
     <paper-card heading="{{move.name}}" class$="attributeCard {{active}}" animated=true>
-      <div class="card-content">{{move.decription}}</div>
-      <div class="card-actions">
-        <p>Stats</p>
+      <div class="card-content">
+        <h4>Stats <paper-icon-button icon="help-outline" id="desc"></paper-icon-button><paper-tooltip for="desc">{{move.decription}}</paper-tooltip> </h4>
         <span>Sta: <strong>{{move.staminaCost}}</strong></span>
         <span>HP: <strong>{{move.physicalDamage}}</strong></span>
         <span>Lust: <strong>{{move.lustDamage}}</strong></span>
         <span>H-Dur: <strong>{{move.holdDuration}}</strong></span>
       </div>
       <div class="card-actions">
-        <p>Requirements</p>
+        <h4>Requirements</h4>
         <span>Str: <strong class$="req {{reqStrength}}">{{move.reqStrength}}</strong></span>
         <span>Sp: <strong class$="req {{reqSpeed}}">{{move.reqSpeed}}</strong></span>
         <span>Org: <strong class$="req {{reqOrgasm}}">{{move.reqOrgasm}}</strong></span>
